@@ -1,4 +1,4 @@
-module github.com/FaaSterMetrics/terraform-provider-tinyfaas
+module github.com/Be-FaaS/terraform-provider-tinyfaas
 
 go 1.14
 
