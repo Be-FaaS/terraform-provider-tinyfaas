@@ -51,11 +51,11 @@ func uploadFunction(address, name, zipPath string, numThreads int, env map[strin
 	up := uploadPackage{Name: name, Threads: numThreads, Zip: b64}
 	up.Environment = env
 	ups, _ := json.Marshal(up)
-	http.Post("http://"+address+":8080/upload", "application/json", bytes.NewBuffer(ups))
+	http.Post("http://"+address+"/upload", "application/json", bytes.NewBuffer(ups))
 }
 
 func deleteFunction(address, name string) {
-	http.Post("http://"+address+":8080/delete", "application/json", bytes.NewBuffer([]byte(name)))
+	http.Post("http://"+address+"/delete", "application/json", bytes.NewBuffer([]byte(name)))
 }
 
 type funcList []struct {
@@ -67,7 +67,7 @@ type funcList []struct {
 
 func getFuncID(address, name string) string {
 	var funcs funcList
-	resp, _ := http.Get("http://" + address + ":8080/list")
+	resp, _ := http.Get("http://" + address + "/list")
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
 	json.Unmarshal(body, &funcs)
@@ -82,7 +82,7 @@ func getFuncID(address, name string) string {
 
 func findFuncID(address, id string) string {
 	var funcs funcList
-	resp, _ := http.Get("http://" + address + ":8080/list")
+	resp, _ := http.Get("http://" + address + "/list")
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
 	json.Unmarshal(body, &funcs)
