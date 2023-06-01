@@ -97,7 +97,7 @@ func findFuncID(address, id string) string {
 }
 
 func resourceServerCreate(d *schema.ResourceData, m interface{}) error {
-	address := os.Getenv("TINYFAAS_ADDRESS")
+	address := os.Getenv("TINYFAAS_ADDRESS") + ":" + os.Getenv("TINYFAAS_MPORT")
 	name := d.Get("name").(string)
 	zipPath := d.Get("zip_path").(string)
 	numThreads := d.Get("num_threads").(int)
@@ -109,7 +109,7 @@ func resourceServerCreate(d *schema.ResourceData, m interface{}) error {
 }
 
 func resourceServerRead(d *schema.ResourceData, m interface{}) error {
-	address := os.Getenv("TINYFAAS_ADDRESS")
+	address := os.Getenv("TINYFAAS_ADDRESS") + ":" + os.Getenv("TINYFAAS_MPORT")
 	name := d.Get("name").(string)
 	zipPath := d.Get("zip_path").(string)
 	numThreads := d.Get("num_threads").(int)
@@ -124,7 +124,7 @@ func resourceServerRead(d *schema.ResourceData, m interface{}) error {
 }
 
 func resourceServerUpdate(d *schema.ResourceData, m interface{}) error {
-	address := os.Getenv("TINYFAAS_ADDRESS")
+	address := os.Getenv("TINYFAAS_ADDRESS") + ":" + os.Getenv("TINYFAAS_MPORT")
 	name := d.Get("name").(string)
 	zipPath := d.Get("zip_path").(string)
 	numThreads := d.Get("num_threads").(int)
@@ -140,7 +140,7 @@ func resourceServerUpdate(d *schema.ResourceData, m interface{}) error {
 }
 
 func resourceServerDelete(d *schema.ResourceData, m interface{}) error {
-	address := os.Getenv("TINYFAAS_ADDRESS")
+	address := os.Getenv("TINYFAAS_ADDRESS") + ":" + os.Getenv("TINYFAAS_MPORT")
 	name := d.Get("name").(string)
 	deleteFunction(address, name)
 	d.SetId("")
